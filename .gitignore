@@ -1,0 +1,21 @@
+config.yml
+node_modules
+**/.DS_Store
+.vscode/
+
+#compiled assets
+theme/assets/main.css
+theme/assets/main.scss
+theme/assets/main.scss.liquid
+theme/assets/main.js
+*.chunk.*.js
+*.chunk.js
+
+#the extracted zip
+theme.zip
+
+#emails assets
+emails/css/
+
+#webpack report
+theme/assets/webpack-bundle-report.html
