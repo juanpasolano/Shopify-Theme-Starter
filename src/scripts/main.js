@@ -6,7 +6,7 @@ import Lazyload from "./lazyload";
       this.initializeModules();
       this.initializeEditor();
     }
-    initializeModules(){
+    initializeModules() {
       //Lazy
       Lazyload.init();
     }
