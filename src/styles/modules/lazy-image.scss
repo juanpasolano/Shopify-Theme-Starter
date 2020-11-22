@@ -1,0 +1,111 @@
+/* CUSTOM LAZYLOAD v0.0.1 - see lazyload.js for functionality
+========================================================================== */
+
+.lazy {
+  width: 100%;
+  // height: auto;
+  height: 100%; // fix 100% 
+  display: block;
+  position: relative;
+
+  &--loaded {
+    .lazy {
+      &__img {
+        &--translate-in {
+          transform: translateY(0);
+          opacity: 1;
+        }
+
+        &--fade-in {
+          opacity: 1;
+        }
+      }
+
+      &__loader {
+        opacity: 0;
+      }
+    }
+  }
+
+  &--done {
+    .lazy {
+      &__img {
+        position: relative;
+        top: auto;
+        right: auto;
+        bottom: auto;
+        left: auto;
+      }
+
+      &__loader {
+        display: none;
+      }
+    }
+  }
+
+  &--color {
+    .lazy {
+      &__loader {
+        transition: opacity 1s ease;
+      }
+
+      &__placeholder {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity: 1;
+      }
+    }
+  }
+
+  &__img {
+    width: 100%;
+    // height: auto;
+    height: 100%; // fix 100% 
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
+    object-fit: cover;
+    object-position: center;
+
+    &--translate-in {
+      transform: translateY(-20px);
+      opacity: 0;
+    }
+
+    &--fade-in {
+      opacity: 0;
+    }
+
+    &--relative {
+      position: relative;
+    }
+  }
+
+  &__loader {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: relative;
+    z-index: 0;
+    opacity: 1;
+
+    &--hidden {
+      display: none !important;
+    }
+  }
+
+  &__placeholder {
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 0;
+
+  }
+}

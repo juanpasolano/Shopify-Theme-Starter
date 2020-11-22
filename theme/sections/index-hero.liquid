@@ -1,6 +1,13 @@
 <div>
-  hellos
   {{section.settings.text}}
+  {%
+    include 'lazy-image',
+    type: 'color',
+    image_base: section.settings.desk_image
+    sizes: '100vw',
+    srcs: '800x,1000x,1440x',
+    alt: media.alt | escape
+  %}
 </div>
 
 {% schema %}
@@ -11,6 +18,16 @@
       "type": "text",
       "id": "text",
       "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "desk_image",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile Image"
     }
   ],
   "presets": [

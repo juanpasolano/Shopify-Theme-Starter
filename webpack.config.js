@@ -39,6 +39,7 @@ module.exports = {
             loader: "css-loader",
             options: { url: false },
           },
+          { loader: "sass-loader" },
           { loader: "postcss-loader" },
         ],
       },
@@ -78,7 +79,7 @@ module.exports = {
       stats: { colors: true },
     }),
     new OptimizeCSSAssetsPlugin({
-      assetNameRegExp: /\.scss.liquid/g,
+      assetNameRegExp: isProduction ? /\.scss.liquid/g : /disabled/,
       cssProcessor: require("cssnano"),
       cssProcessorPluginOptions: {
         preset: ["default", { discardComments: { removeAll: true } }],
