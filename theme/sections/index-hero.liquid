@@ -1,0 +1,23 @@
+<div>
+  hellos
+  {{section.settings.text}}
+</div>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name":"Hero"
+    }
+  ]
+}
+{% endschema %}
