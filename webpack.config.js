@@ -8,7 +8,8 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPl
 
 const isProduction = !!((argv.env && argv.env.production) || argv.p);
 
-const jsChunkFilename = argv.forcedCache || isProduction ? "[name].[chunkhash:5].chunk.js" : "[name].chunk.js?t=[chunkhash:5]";
+const jsChunkFilename =
+  argv.forcedCache || isProduction ? "[name].[chunkhash:5].chunk.js" : "[name].chunk.js?t=[chunkhash:5]";
 
 const srcPath = path.join(__dirname, "/src");
 
@@ -16,11 +17,11 @@ module.exports = {
   mode: isProduction ? "production" : "development",
   context: srcPath,
   entry: {
-    main: [path.join(srcPath, "/scripts/main.js"), path.join(srcPath, "/styles/main.scss")]
+    main: [path.join(srcPath, "/scripts/main.js"), path.join(srcPath, "/styles/main.scss")],
   },
   output: {
     path: path.join(__dirname, "/theme/assets"),
-    chunkFilename: jsChunkFilename
+    chunkFilename: jsChunkFilename,
   },
   module: {
     rules: [
@@ -31,15 +32,15 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
             options: {
               // publicPath: "../",
-              hmr: process.env.NODE_ENV === "development"
-            }
+              hmr: process.env.NODE_ENV === "development",
+            },
           },
           {
             loader: "css-loader",
-            options: { url: false }
+            options: { url: false },
           },
-          { loader: "sass-loader" }
-        ]
+          { loader: "postcss-loader" },
+        ],
       },
       {
         test: /\.js$/,
@@ -47,46 +48,46 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["@babel/preset-env"]
-          }
-        }
-      }
-    ]
+            presets: ["@babel/preset-env"],
+          },
+        },
+      },
+    ],
   },
   resolve: {
     modules: [srcPath, "node_modules"],
-    enforceExtension: false
+    enforceExtension: false,
   },
   externals: {
-    jquery: "jQuery"
+    jquery: "jQuery",
   },
   optimization: {
     splitChunks: {
-      automaticNameDelimiter: "-"
-    }
+      automaticNameDelimiter: "-",
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "[name].scss.liquid?t=[chunkhash:5]",
       chunkFilename: "[id].chunk.scss.liquid?t=[chunkhash:5]",
-      ignoreOrder: false
+      ignoreOrder: false,
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: isProduction,
       debug: !isProduction,
-      stats: { colors: true }
+      stats: { colors: true },
     }),
     new OptimizeCSSAssetsPlugin({
       cssProcessor: require("cssnano"),
       cssProcessorPluginOptions: {
-        preset: ["default", { discardComments: { removeAll: true } }]
+        preset: ["default", { discardComments: { removeAll: true } }],
       },
-      canPrint: true
+      canPrint: true,
     }),
     new CleanObsoleteChunks(),
     new BundleAnalyzerPlugin({
       analyzerMode: isProduction ? "static" : "disabled",
-      reportFilename: "webpack-bundle-report.html"
-    })
-  ]
+      reportFilename: "webpack-bundle-report.html",
+    }),
+  ],
 };
