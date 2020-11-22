@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:production": "webpack --env.production --progress --config webpack.config.js",
+    "build:production": "NODE_ENV=production webpack --env.production --progress --config webpack.config.js",
     "build": "webpack --hide-modules --watch  --config webpack.config.js",
-    "open": "node scripts/open.js",
+    "open": "theme open",
     "start": "npm-run-all -p theme:watch build",
     "start:cache": "npm-run-all -p theme:watch 'build --forced-cache'",
     "theme:deploy": "yarn run build:production && theme deploy -e development -d theme",

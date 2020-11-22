@@ -78,6 +78,7 @@ module.exports = {
       stats: { colors: true },
     }),
     new OptimizeCSSAssetsPlugin({
+      assetNameRegExp: /\.scss.liquid/g,
       cssProcessor: require("cssnano"),
       cssProcessorPluginOptions: {
         preset: ["default", { discardComments: { removeAll: true } }],
@@ -86,7 +87,8 @@ module.exports = {
     }),
     new CleanObsoleteChunks(),
     new BundleAnalyzerPlugin({
-      analyzerMode: isProduction ? "static" : "disabled",
+      // analyzerMode: isProduction ? "static" : "disabled",
+      analyzerMode: "disabled",
       reportFilename: "webpack-bundle-report.html",
     }),
   ],
