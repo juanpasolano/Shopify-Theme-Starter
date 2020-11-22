@@ -1,24 +1,47 @@
-<div>
-  {{section.settings.text}}
-  {%
-    include 'lazy-image',
-    type: 'color',
-    image_base: section.settings.desk_image
-    sizes: '100vw',
-    srcs: '800x,1000x,1440x',
-    alt: media.alt | escape
-  %}
+{%- assign classNames = "items-center justify-center" -%}
+
+{%- case section.settings.text_position -%}
+{%- when "top-left" -%}
+  {%- assign classNames = "items-start justify-start" -%}
+{%- when "top-center" -%}
+  {%- assign classNames = "items-start justify-center" -%}
+{%- when "top-right" -%}
+  {%- assign classNames = "items-start justify-end" -%}
+
+{%- when "bottom-left" -%}
+  {%- assign classNames = "items-end justify-start" -%}
+{%- when "bottom-center" -%}
+  {%- assign classNames = "items-end justify-center" -%}
+{%- when "bottom-right" -%}
+  {%- assign classNames = "items-end justify-end" -%}
+
+{%- when "center-left" -%}
+  {%- assign classNames = "items-center justify-start" -%}
+{%- when "center-right" -%}
+  {%- assign classNames = "items-center justify-end" -%}
+{%- endcase -%}
+
+<div class="relative flex h-screen {{classNames}} ">
+  <div class="z-10 p-5 max-h-24">
+    {{section.settings.text}} {{classNames}}
+  </div>
+  <div class="absolute w-full h-full z-0">
+    {%
+      include 'lazy-image',
+      type: 'color',
+      image_base: section.settings.desk_image
+      sizes: '100vw',
+      srcs: '800x,1000x,1440x',
+      alt: media.alt | escape
+    %}
+  </div>
+
 </div>
 
 {% schema %}
 {
   "name": "Hero",
   "settings": [
-    {
-      "type": "text",
-      "id": "text",
-      "label": "Text"
-    },
     {
       "type": "image_picker",
       "id": "desk_image",
@@ -28,12 +51,61 @@
       "type": "image_picker",
       "id": "mobile_image",
       "label": "Mobile Image"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text Position",
+      "default": "center",
+      "options": [
+        {
+          "value": "center",
+          "label": "center"
+        },
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        },
+        {
+          "value": "top-center",
+          "label": "Top Center"
+        },
+        {
+          "value": "top-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "center-left",
+          "label": "Center Left"
+        },
+        {
+          "value": "center-right",
+          "label": "Center Right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom Center"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        }
+      ]
     }
   ],
   "presets": [
     {
       "category": "Image",
-      "name":"Hero"
+      "name": "Hero"
     }
   ]
 }
