@@ -20,6 +20,8 @@
 
   {% section 'footer' %}
 
+  {% include 'asset-path' %}
+  {{ "jquery.min.js" | asset_url | script_tag }}
   {{ "main.js" | asset_url | script_tag }} 
 </body>
 </html>
